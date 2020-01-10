@@ -2,7 +2,6 @@ package Global;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Vector;
 
 public class NFAEpsilon extends DFA {
     //set de java util pas set dans global
@@ -36,6 +35,10 @@ public class NFAEpsilon extends DFA {
         this.accepter_etat = accepter_etat;
     }
 
+    public Transition getTransition() {
+        return transition;
+    }
+
     public void setTransition(NFATransition transition) {
         this.transition = transition;
     }
@@ -63,7 +66,26 @@ public class NFAEpsilon extends DFA {
         ensemble_etats.addAll(etatSet);
     }
     public void ajouter_arc(Etat source, Etat destination, char start){
-
-
+        Arc arc =new Arc(source,destination,new Symbol(start));
+        transition.ajouter(arc);
     }
+    //modification
+    public void modifier_etat(Etat ancien, Etat nouveau){
+        if(ancien.getIndexe() == initial_etat.getIndexe()){
+            ensemble_etats.remove(ancien);
+            setInitial_etat(nouveau);
+        }
+        else {
+            if (ancien.getIndexe() == accepter_etat.getIndexe()){
+                ensemble_etats.remove(ancien);
+                setAccepter_etat(nouveau);
+            }
+            else{
+                ensemble_etats.remove(ancien);
+                ensemble_etats.add(nouveau);
+            }
+
+        }
+    }
+
 }
