@@ -64,5 +64,6 @@ public class NFAEpsilon extends DFA {
     }
     public void ajouter_arc(Etat source, Etat destination, char start){
 
+
     }
 }
