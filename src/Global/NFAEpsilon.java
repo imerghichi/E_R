@@ -35,7 +35,7 @@ public class NFAEpsilon extends DFA {
         this.accepter_etat = accepter_etat;
     }
 
-    public Transition getTransition() {
+    public NFATransition getNFATransition() {
         return transition;
     }
 
