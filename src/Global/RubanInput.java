@@ -13,7 +13,6 @@ public class RubanInput {
         return (tete_lecture >= buffer.length());
     }
 
-
     public void initialiser (){
         tete_lecture = 0;
         start = 0;
