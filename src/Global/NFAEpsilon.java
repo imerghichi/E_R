@@ -2,6 +2,7 @@ package Global;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Vector;
 
 public class NFAEpsilon extends DFA {
     //set de java util pas set dans global
@@ -88,4 +89,12 @@ public class NFAEpsilon extends DFA {
         }
     }
 
+    public Vector<Etat> getMappingSymbol(NFAClosure nfaClosure, Symbol symbol){
+        Vector<Etat> vector = new Vector<Etat>();
+        for(int i=0; i<nfaClosure.getClosure().size();i+=){
+            vector.addAll(transition.getEtatsAccessibles(nfaClosure.getClosure().get(i),symbol.getSymbol()));
+        }
+        return vector;
+
+    }
 }
