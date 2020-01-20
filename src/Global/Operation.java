@@ -43,7 +43,38 @@ public class Operation {
 
         transition = A.getNFATransition();
         transition.ajouter_tout_transition(B.getNFATransition());
-        ////:
+        transition.setDestination(A.getAccepter_etat(),B.getInitial_etat());
+
+        C.setTransition(transition);
+        C.ajouter_etats(A.getEtatSet());
+        C.ajouter_etats(B.getEtatSet());
+        C.modifier_etat(A.getAccepter_etat(),B.getInitial_etat());
+
+        return C;
     }
+
+    static private NFAEpsilon union (NFAEpsilon A, NFAEpsilon B){
+        NFATransition transition = new NFATransition(40);
+
+        NFAEpsilon C = new NFAEpsilon();
+
+        C.setInitial_etat(new Etat(false, true));
+        C.setAccepter_etat(new Etat(true,false));
+
+        transition= A.getNFATransition();
+        transition.ajouter_tout_transition(B.getNFATransition());
+        C.ajouter_etats(A.getEtatSet());
+        C.ajouter_etats(B.getEtatSet());
+
+        transition.ajouter(new Arc(C.getInitial_etat(),A.getInitial_etat(),new Symbol(EPSILON)));
+        transition.ajouter(new Arc(C.getInitial_etat(),B.getInitial_etat(),new Symbol(EPSILON)));
+        transition.ajouter(new Arc(A.getAccepter_etat(),C.getAccepter_etat(), new Symbol(EPSILON)));
+        transition.ajouter(new Arc(B.getAccepter_etat(),C.getAccepter_etat(), new Symbol(EPSILON)));
+
+        C.setTransition(transition);
+
+        return C;
+    }
+
 
 }
